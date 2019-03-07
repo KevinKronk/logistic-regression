@@ -1,0 +1,10 @@
+# logistic-regression
+A project to demonstrate the use of gradient descent and regularization with logistic regression. 
+
+## Screenshots
+
+## Contributing
+Pull requests are welcome. Otherwise the project is just a demonstration.
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
