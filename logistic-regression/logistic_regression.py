@@ -1,12 +1,17 @@
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 
-# exam 1 score, exam 2 score, admitted?
+from sigmoid import sigmoid
+from cost import log_cost
+
+# Load Data
 
 filename = 'ex2data1.txt'
 df = pd.read_csv(filename, header=None, names=['Exam 1', 'Exam 2', 'Admitted'])
 
+
+# Plot Data
 
 positive = df[df['Admitted'].isin([1])]
 negative = df[df['Admitted'].isin([0])]
@@ -20,11 +25,29 @@ plt.ylabel("Exam 2 score")
 plt.show()
 
 
-def sigmoid(z):
-    return 1 / (1 + np.exp(-z))
-
+# Plot Sigmoid
 
 nums = np.arange(-10, 10, step=1)
 plt.plot(nums, sigmoid(nums))
 plt.show()
+
+
+# Convert DataFrames to ndarrays
+
+df.insert(0, 'Ones', 1)
+
+cols = df.shape[1]
+x = df.iloc[:, 0:cols-1]
+y = df.iloc[:, cols-1:cols]
+
+x = x.values
+y = y.values
+
+theta = np.array([[0 for _ in range(cols-1)]])
+
+
+# Logistic Cost Function
+
+cost = log_cost(x, y, theta)
+print(cost)
 

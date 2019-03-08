@@ -1,5 +1,5 @@
 import numpy as np
-from logistic_regression import sigmoid
+from sigmoid import sigmoid
 
 
 def log_cost(x, y, theta):
