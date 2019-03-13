@@ -10,12 +10,12 @@ from predict import predict
 
 # Load Data
 
-filename = 'ex2data2.txt'
+filename = 'ex2data1.txt'
 df = pd.read_csv(filename, header=None, names=['Exam 1', 'Exam 2', 'Admitted'])
 
 
 # Plot Data
-
+'''
 positive = df[df['Admitted'].isin([1])]
 negative = df[df['Admitted'].isin([0])]
 
@@ -26,7 +26,7 @@ plt.legend()
 plt.xlabel("Exam 1 score")
 plt.ylabel("Exam 2 score")
 plt.show()
-
+'''
 
 # Plot Sigmoid
 '''
@@ -49,22 +49,18 @@ y = y.values
 theta = np.array([[0 for _ in range(cols-1)]])
 print(x.shape, theta.shape, y.shape)
 
+
+hyper_p = 0.001
+
 # Logistic Cost Function
 
-cost = log_cost(theta, x, y)
+cost = log_cost(theta, x, y, hyper_p)
 print(cost)
-
-alpha = 0.0009
-iterations = 1000000
-
-# new_theta, cost_history = gradient_descent(x, y, theta, alpha, iterations)
-# print(new_theta)
-# print(cost_history)
 
 
 result = opt.fmin_tnc(func=log_cost, x0=theta, fprime=gradient_descent,
-                      args=(x, y))
-print(log_cost(result[0], x, y))
+                      args=(x, y, hyper_p))
+print(log_cost(result[0], x, y, hyper_p))
 
 
 # plt.plot([_ for _ in range(iterations)], cost_history)

@@ -3,7 +3,7 @@ from cost import log_cost
 from sigmoid import sigmoid
 
 
-def gradient_descent(theta, x, y):  # , alpha, iterations):
+def gradient_descent(theta, x, y, hyper_p):  # , alpha, iterations):
     # Create temporary array for updating theta
     theta = np.reshape(theta, (1, 3))
     size = y.shape[0]
@@ -17,7 +17,11 @@ def gradient_descent(theta, x, y):  # , alpha, iterations):
 
     for parameter in range(parameters):
         delta = error * x[:, [parameter]]
-        temp[parameter] = delta.sum()
+
+        if parameter == 0:
+            temp[parameter] = delta.sum()
+        else:
+            temp[parameter] = delta.sum() + ((hyper_p / size) * theta[:, parameter])
         # temp[0, parameter] = theta[0, parameter] - (alpha * delta.sum())
 
     # theta = temp
