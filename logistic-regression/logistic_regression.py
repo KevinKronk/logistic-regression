@@ -50,7 +50,7 @@ theta = np.array([[0 for _ in range(cols-1)]])
 print(x.shape, theta.shape, y.shape)
 
 
-hyper_p = 0.001
+hyper_p = 0.00025
 
 # Logistic Cost Function
 
