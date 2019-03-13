@@ -10,23 +10,23 @@ from predict import predict
 
 # Load Data
 
-filename = 'ex2data1.txt'
+filename = 'ex2data2.txt'
 df = pd.read_csv(filename, header=None, names=['Exam 1', 'Exam 2', 'Admitted'])
 
 
 # Plot Data
-'''
+
 positive = df[df['Admitted'].isin([1])]
 negative = df[df['Admitted'].isin([0])]
 
-plt.scatter(positive['Exam 1'], positive['Exam 2'], s=15, c='b', marker='*', label='Admitted')
-plt.scatter(negative['Exam 1'], negative['Exam 2'], s=10, c='r', marker='^', label='Not Admitted')
+plt.scatter(positive['Exam 1'], positive['Exam 2'], s=15, c='b', marker='o', label='Admitted')
+plt.scatter(negative['Exam 1'], negative['Exam 2'], s=15, c='r', marker='x', label='Not Admitted')
 
 plt.legend()
 plt.xlabel("Exam 1 score")
 plt.ylabel("Exam 2 score")
 plt.show()
-'''
+
 
 # Plot Sigmoid
 '''
@@ -71,6 +71,6 @@ print(log_cost(result[0], x, y))
 # plt.show()
 
 opt_theta = np.reshape(result[0], (1, 3))
-predictions = predict(opt_theta, x)
+accuracy = predict(opt_theta, x, y)
 
-print(predictions)
+print(f"Accuracy = {accuracy * 100}%")
