@@ -6,6 +6,7 @@ from sigmoid import sigmoid
 from cost import log_cost
 from gradient_descent import gradient_descent
 import scipy.optimize as opt
+from predict import predict
 
 # Load Data
 
@@ -68,3 +69,8 @@ print(log_cost(result[0], x, y))
 
 # plt.plot([_ for _ in range(iterations)], cost_history)
 # plt.show()
+
+opt_theta = np.reshape(result[0], (1, 3))
+predictions = predict(opt_theta, x)
+
+print(predictions)
