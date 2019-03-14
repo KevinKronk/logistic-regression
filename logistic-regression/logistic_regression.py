@@ -46,18 +46,18 @@ x = x.values
 y = y.values
 
 # Map Features
-x = map_feature(x[:, 0], x[:, 1])
+x = map_feature(x[:, 0], x[:, 1], degree=6)
 
 # Create Theta
 theta = np.array([[0 for _ in range(x.shape[1])]])
 print(x.shape, theta.shape, y.shape)
 
 # Set Hyperparameter
-hyper_p = 1
+hyper_p = 0.00001
 
 
 # Minimize Function
-options = {'maxiter': 100}
+options = {'maxiter': 400}
 res = opt.minimize(log_cost, theta, (x, y, hyper_p), jac=True, method='TNC', options=options)
 
 cost = res.fun

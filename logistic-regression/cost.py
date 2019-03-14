@@ -1,6 +1,6 @@
 import numpy as np
 from sigmoid import sigmoid
-from gradient_descent import gradient_descent
+from gradient import gradient
 
 
 def log_cost(theta, x, y, hyper_p):
@@ -12,5 +12,5 @@ def log_cost(theta, x, y, hyper_p):
     reg = (hyper_p / 2 * size) * np.sum(theta[:, 1:theta.shape[1]] ** 2)
 
     cost = -((1 / size) * np.sum(y * np.log(h) + (1 - y) * np.log(1 - h))) + reg
-    gradient = gradient_descent(theta, x, y, hyper_p)
-    return cost, gradient
+    grad = gradient(theta, x, y, hyper_p)
+    return cost, grad
