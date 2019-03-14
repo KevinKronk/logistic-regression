@@ -9,12 +9,12 @@ from map_feature import map_feature
 
 # Load Data
 
-filename = 'ex2data2.txt'
+filename = 'microchip_tests.txt'
 df = pd.read_csv(filename, header=None, names=['Exam 1', 'Exam 2', 'Admitted'])
 
 
 # Plot Data
-'''
+
 positive = df[df['Admitted'].isin([1])]
 negative = df[df['Admitted'].isin([0])]
 
@@ -22,10 +22,10 @@ plt.scatter(positive['Exam 1'], positive['Exam 2'], s=15, c='b', marker='o', lab
 plt.scatter(negative['Exam 1'], negative['Exam 2'], s=15, c='r', marker='x', label='Not Admitted')
 
 plt.legend()
-plt.xlabel("Exam 1 score")
-plt.ylabel("Exam 2 score")
+plt.xlabel("Exam 1 Score")
+plt.ylabel("Exam 2 Score")
 plt.show()
-'''
+
 
 # Plot Sigmoid
 '''
@@ -53,7 +53,7 @@ theta = np.array([[0 for _ in range(x.shape[1])]])
 print(x.shape, theta.shape, y.shape)
 
 # Set Hyperparameter
-hyper_p = 0.00001
+hyper_p = 1
 
 
 # Minimize Function
