@@ -1,11 +1,13 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+import scipy.optimize as opt
 
 from cost import log_cost
-import scipy.optimize as opt
-from predict import predict
 from map_feature import map_feature
+from predict import predict
+
+# Logistic Regression using scipy.optimize.minimize and regularization
 
 # Load Data
 
