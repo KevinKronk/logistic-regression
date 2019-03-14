@@ -2,15 +2,14 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-from sigmoid import sigmoid
 from cost import log_cost
-from gradient_descent import gradient_descent
 import scipy.optimize as opt
 from predict import predict
+from map_feature import map_feature
 
 # Load Data
 
-filename = 'ex2data1.txt'
+filename = 'ex2data2.txt'
 df = pd.read_csv(filename, header=None, names=['Exam 1', 'Exam 2', 'Admitted'])
 
 
@@ -46,27 +45,28 @@ y = df.iloc[:, cols-1:cols]
 x = x.values
 y = y.values
 
-theta = np.array([[0 for _ in range(cols-1)]])
+# Map Features
+x = map_feature(x[:, 0], x[:, 1])
+
+# Create Theta
+theta = np.array([[0 for _ in range(x.shape[1])]])
 print(x.shape, theta.shape, y.shape)
 
+# Set Hyperparameter
+hyper_p = 1
 
-hyper_p = 0.00025
 
-# Logistic Cost Function
+# Minimize Function
+options = {'maxiter': 100}
+res = opt.minimize(log_cost, theta, (x, y, hyper_p), jac=True, method='TNC', options=options)
 
-cost = log_cost(theta, x, y, hyper_p)
+cost = res.fun
 print(cost)
+new_theta = res.x
+print(new_theta)
 
-
-result = opt.fmin_tnc(func=log_cost, x0=theta, fprime=gradient_descent,
-                      args=(x, y, hyper_p))
-print(log_cost(result[0], x, y, hyper_p))
-
-
-# plt.plot([_ for _ in range(iterations)], cost_history)
-# plt.show()
-
-opt_theta = np.reshape(result[0], (1, 3))
-accuracy = predict(opt_theta, x, y)
+# Determine Accuracy
+accuracy = predict(new_theta, x, y)
 
 print(f"Accuracy = {accuracy * 100}%")
+

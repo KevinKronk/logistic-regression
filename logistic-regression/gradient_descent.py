@@ -1,17 +1,13 @@
 import numpy as np
-from cost import log_cost
 from sigmoid import sigmoid
 
 
-def gradient_descent(theta, x, y, hyper_p):  # , alpha, iterations):
+def gradient_descent(theta, x, y, hyper_p):
     # Create temporary array for updating theta
-    theta = np.reshape(theta, (1, 3))
+    theta = np.reshape(theta, (1, x.shape[1]))
     size = y.shape[0]
     parameters = x.shape[1]
-    temp = np.zeros(parameters)
-    # cost_history = np.zeros(iterations)
-
-    # for iteration in range(iterations):
+    gradient = np.zeros(parameters)
 
     error = (1 / size) * (sigmoid(x @ theta.T) - y)
 
@@ -19,13 +15,9 @@ def gradient_descent(theta, x, y, hyper_p):  # , alpha, iterations):
         delta = error * x[:, [parameter]]
 
         if parameter == 0:
-            temp[parameter] = delta.sum()
+            gradient[parameter] = delta.sum()
         else:
-            temp[parameter] = delta.sum() + ((hyper_p / size) * theta[:, parameter])
-        # temp[0, parameter] = theta[0, parameter] - (alpha * delta.sum())
+            gradient[parameter] = delta.sum() + ((hyper_p / size) * theta[:, parameter])
 
-    # theta = temp
-    # cost_history[iteration] = log_cost(x, y, theta)
-
-    return temp  # , cost_history
+    return gradient
 
